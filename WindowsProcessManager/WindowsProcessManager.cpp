@@ -32,12 +32,12 @@ private:
 	}
 	vector<Process>* queryProcess(wstring pName) {
 		checkRefreshProcessList();
-		auto equalPID = [](const Process & a, const Process & b) -> bool
+		auto equalPName = [](const Process & a, const Process & b) -> bool
 		{
 			return a.getPName() == b.getPName();
 		};
 		vector<Process>* list = new vector<Process>();
-		processList->find(Process(-1, pName), list, equalPID);
+		processList->find(Process(-1, pName), list, equalPName);
 		return list;
 	}
 	void getProcessList() {
@@ -151,8 +151,8 @@ public:
 				cp->matchOptions();
 				if (cp->hasOption(L"h") || cp->hasOption(L"help", true)) {
 					wprintf(L"start - 创建进程\n"
-						L"start - 进入创建向导\n"
-						L"start <path> [cmd] - 运行 path 处的程序，可选调用 cmd 参数\n");
+						L"start              进入创建向导\n"
+						L"start <path> [cmd] 运行 path 处的程序，可选调用 cmd 参数\n");
 				}
 				else if (cp->getArgc() == 1) {
 					wstring path, cmd;
